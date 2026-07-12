@@ -168,12 +168,12 @@ EOT
       })
       database_server_configuration = object({
         database_type = optional(string)
-        disk_volume_configuration = optional(object({
+        disk_volume_configuration = optional(list(object({
           number_of_disks = number
           size_in_gb      = number
           sku_name        = string
           volume_name     = string
-        }))
+        })))
         instance_count = number
         subnet_id      = string
         virtual_machine_configuration = object({
@@ -195,16 +195,16 @@ EOT
       resource_names = optional(object({
         application_server = optional(object({
           availability_set_name = optional(string)
-          virtual_machine = optional(object({
-            data_disk = optional(object({
+          virtual_machine = optional(list(object({
+            data_disk = optional(list(object({
               names       = list(string)
               volume_name = string
-            }))
+            })))
             host_name               = optional(string)
             network_interface_names = optional(list(string))
             os_disk_name            = optional(string)
             virtual_machine_name    = optional(string)
-          }))
+          })))
         }))
         central_server = optional(object({
           availability_set_name = optional(string)
@@ -214,16 +214,16 @@ EOT
             health_probe_names              = optional(list(string))
             name                            = optional(string)
           }))
-          virtual_machine = optional(object({
-            data_disk = optional(object({
+          virtual_machine = optional(list(object({
+            data_disk = optional(list(object({
               names       = list(string)
               volume_name = string
-            }))
+            })))
             host_name               = optional(string)
             network_interface_names = optional(list(string))
             os_disk_name            = optional(string)
             virtual_machine_name    = optional(string)
-          }))
+          })))
         }))
         database_server = optional(object({
           availability_set_name = optional(string)
@@ -233,16 +233,16 @@ EOT
             health_probe_names              = optional(list(string))
             name                            = optional(string)
           }))
-          virtual_machine = optional(object({
-            data_disk = optional(object({
+          virtual_machine = optional(list(object({
+            data_disk = optional(list(object({
               names       = list(string)
               volume_name = string
-            }))
+            })))
             host_name               = optional(string)
             network_interface_names = optional(list(string))
             os_disk_name            = optional(string)
             virtual_machine_name    = optional(string)
-          }))
+          })))
         }))
         shared_storage = optional(object({
           account_name          = optional(string)

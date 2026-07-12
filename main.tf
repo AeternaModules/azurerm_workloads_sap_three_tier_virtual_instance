@@ -53,7 +53,7 @@ resource "azurerm_workloads_sap_three_tier_virtual_instance" "workloads_sap_thre
     database_server_configuration {
       database_type = each.value.three_tier_configuration.database_server_configuration.database_type
       dynamic "disk_volume_configuration" {
-        for_each = each.value.three_tier_configuration.database_server_configuration.disk_volume_configuration != null ? [each.value.three_tier_configuration.database_server_configuration.disk_volume_configuration] : []
+        for_each = each.value.three_tier_configuration.database_server_configuration.disk_volume_configuration != null ? each.value.three_tier_configuration.database_server_configuration.disk_volume_configuration : []
         content {
           number_of_disks = disk_volume_configuration.value.number_of_disks
           size_in_gb      = disk_volume_configuration.value.size_in_gb
@@ -87,10 +87,10 @@ resource "azurerm_workloads_sap_three_tier_virtual_instance" "workloads_sap_thre
           content {
             availability_set_name = application_server.value.availability_set_name
             dynamic "virtual_machine" {
-              for_each = application_server.value.virtual_machine != null ? [application_server.value.virtual_machine] : []
+              for_each = application_server.value.virtual_machine != null ? application_server.value.virtual_machine : []
               content {
                 dynamic "data_disk" {
-                  for_each = virtual_machine.value.data_disk != null ? [virtual_machine.value.data_disk] : []
+                  for_each = virtual_machine.value.data_disk != null ? virtual_machine.value.data_disk : []
                   content {
                     names       = data_disk.value.names
                     volume_name = data_disk.value.volume_name
@@ -118,10 +118,10 @@ resource "azurerm_workloads_sap_three_tier_virtual_instance" "workloads_sap_thre
               }
             }
             dynamic "virtual_machine" {
-              for_each = central_server.value.virtual_machine != null ? [central_server.value.virtual_machine] : []
+              for_each = central_server.value.virtual_machine != null ? central_server.value.virtual_machine : []
               content {
                 dynamic "data_disk" {
-                  for_each = virtual_machine.value.data_disk != null ? [virtual_machine.value.data_disk] : []
+                  for_each = virtual_machine.value.data_disk != null ? virtual_machine.value.data_disk : []
                   content {
                     names       = data_disk.value.names
                     volume_name = data_disk.value.volume_name
@@ -149,10 +149,10 @@ resource "azurerm_workloads_sap_three_tier_virtual_instance" "workloads_sap_thre
               }
             }
             dynamic "virtual_machine" {
-              for_each = database_server.value.virtual_machine != null ? [database_server.value.virtual_machine] : []
+              for_each = database_server.value.virtual_machine != null ? database_server.value.virtual_machine : []
               content {
                 dynamic "data_disk" {
-                  for_each = virtual_machine.value.data_disk != null ? [virtual_machine.value.data_disk] : []
+                  for_each = virtual_machine.value.data_disk != null ? virtual_machine.value.data_disk : []
                   content {
                     names       = data_disk.value.names
                     volume_name = data_disk.value.volume_name
