@@ -126,7 +126,7 @@ EOT
     sap_fqdn                              = string
     sap_product                           = string
     managed_resource_group_name           = optional(string)
-    managed_resources_network_access_type = optional(string) # Default: "Public"
+    managed_resources_network_access_type = optional(string)
     tags                                  = optional(map(string))
     three_tier_configuration = object({
       app_resource_group_name = string
@@ -249,7 +249,7 @@ EOT
           private_endpoint_name = optional(string)
         }))
       }))
-      secondary_ip_enabled = optional(bool) # Default: false
+      secondary_ip_enabled = optional(bool)
       transport_create_and_mount = optional(object({
         resource_group_id    = optional(string)
         storage_account_name = optional(string)
